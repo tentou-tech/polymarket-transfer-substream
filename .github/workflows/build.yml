@@ -25,7 +25,7 @@ jobs:
 
     - name: Install Substreams CLI
       run: |
-        wget -c https://github.com/streamingfast/substreams/releases/download/v1.10.4/substreams_linux_x86_64.tar.gz -O - | tar xz
+        wget -c https://github.com/streamingfast/substreams/releases/download/v1.7.2/substreams_linux_x86_64.tar.gz -O - | tar xz
         sudo mv substreams /usr/local/bin/
 
     - name: Build
