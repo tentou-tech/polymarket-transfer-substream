@@ -1,0 +1,10 @@
+FROM ghcr.io/streamingfast/substreams-sink-sql:v4.11.3
+
+WORKDIR /project
+
+COPY polymarket-positions-substream-v0.1.0.spkg .
+COPY start.sh .
+
+RUN chmod +x start.sh
+
+ENTRYPOINT ["/project/start.sh"]
