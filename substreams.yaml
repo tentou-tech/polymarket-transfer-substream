@@ -6,7 +6,9 @@ package:
   description: Substreams module for polymarket_positions_substream on Polygon Mainnet
 
 imports:
+    sql: https://github.com/streamingfast/substreams-sink-sql/releases/download/protodefs-v1.0.7/substreams-sink-sql-protodefs-v1.0.7.spkg
     ethcommon: https://spkg.io/streamingfast/ethereum-common-v0.3.3.spkg
+    database_change: https://github.com/streamingfast/substreams-sink-database-changes/releases/download/v1.2.1/substreams-database-change-v1.2.1.spkg
 
 protobuf:
   files:
@@ -30,9 +32,23 @@ modules:
     blockFilter:
       module: ethcommon:index_events
       query:
-        string: evt_addr:0x4d97dcd97ec945f40cf65f87097ace5ea0476045
+        string: evt_addr:0x4d97dcd97ec945f40cf65f87097ace5ea0476045 && (evt_sig:0xc3d58168c5ae7397731d063d5bbf3d657854427343f4c083240f7aacaa2d0f62 || evt_sig:0x4a39dc06d4c0dbc64b70af90fd698a233a518aa5d07e595d983b8c0526c8f7fb)
     inputs:
       - source: sf.ethereum.type.v2.Block
     output:
       type: proto:contract.v1.Events
+
+  - name: db_out
+    kind: map
+    inputs:
+      - map: map_events
+    output:
+      type: proto:sf.substreams.sink.database.v1.DatabaseChanges
+
+sink:
+  module: db_out
+  type: sf.substreams.sink.sql.v1.Service
+  config:
+    schema: "./schema.sql"
+
 network: polygon

@@ -4,6 +4,11 @@ use substreams_ethereum::Abigen;
 use std::fs;
 
 fn main() -> Result<(), anyhow::Error> {
+    println!("cargo:rerun-if-changed=build.rs");
+    println!("cargo:rerun-if-changed=src/");
+    println!("cargo:rerun-if-changed=abi/");
+    println!("cargo:rerun-if-changed=proto/");
+
     let file_names = [
         "abi/conditional_tokens_contract.abi.json",
     ];
