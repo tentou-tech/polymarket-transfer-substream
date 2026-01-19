@@ -41,6 +41,7 @@ services:
       - SUBSTREAMS_API_TOKEN=${SUBSTREAMS_API_TOKEN}
       - PG_DSN=psql://dev:insecure@postgres:5432/main?sslmode=disable
       - SPKG=polymarket-positions-substream-v0.1.0.spkg
+      - ENDPOINT=polygon.streamingfast.io:443
     volumes:
       - ./polymarket-positions-substream-v0.1.0.spkg:/project/polymarket-positions-substream-v0.1.0.spkg
       - ./schema.sql:/project/schema.sql

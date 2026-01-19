@@ -9,7 +9,7 @@ sleep 2
 if [ -f "$SPKG" ]; then
     echo "Starting sink with package $SPKG..."
     /app/substreams-sink-sql setup "$PG_DSN" "$SPKG"
-    /app/substreams-sink-sql run "$PG_DSN" "$SPKG"
+    /app/substreams-sink-sql run "$PG_DSN" "$SPKG" -e "$ENDPOINT"
 else
     echo "Package $SPKG not found!"
 fi
